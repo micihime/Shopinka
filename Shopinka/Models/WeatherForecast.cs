@@ -1,6 +1,6 @@
 using System;
 
-namespace Shopinka
+namespace Shopinka.Models
 {
     public class WeatherForecast
     {
