@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shopinka.Models;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace Shopinka.Controllers
 {
@@ -8,55 +9,61 @@ namespace Shopinka.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly ShopinkaContext _context;
+
+        public ProductsController()
+        {
+            _context = new ShopinkaContext();
+        }
+
         // GET: api/<ProductsController>
         [HttpGet]
         public IActionResult Get()
         {
-            var items = new List<Product> {
-                new Product
-                {
-                    Id = 1,
-                    Name = "Arónia osudu 1",
-                    ImageUri = "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg",
-                    Price = 1.99M,
-                    Description = "Vášeň ukrytá v čokoláde."
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "Arónia osudu 2",
-                    ImageUri = "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg",
-                    Price = 2.99M,
-                    Description = "Čokoláda je jedným z najväčších pokušení aké si človek len môže predstaviť. "
-                }
-            };
-            return Ok(items);
+            return Ok(_context.Products.ToList());
         }
 
         // GET: api/<ProductsController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var item = new Product
-            {
-                Id = id,
-                Name = "Arónia osudu",
-                ImageUri = "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg",
-                Price = 1.99M,
-                Description = "Vášeň ukrytá v čokoláde. Čokoláda je jedným z najväčších pokušení aké si človek len môže predstaviť. "
-            };
+            var product = _context.Products.Find(id);
 
-            return Ok(item);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
         }
 
         // PUT api/<ProductsController>/5
         [HttpPut]
-        public IActionResult Put([FromBody] Product item)
+        public IActionResult Put(int id, Product product)
         {
-            if (!ModelState.IsValid)
+            if (id != product.Id)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
+
+            _context.Entry(product).State = EntityState.Modified;
+
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Products.Any(e => e.Id == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
             return NoContent();
         }
     }
