@@ -6,11 +6,11 @@ namespace Shopinka.Core.Repositories
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        TEntity GetByIdAsync(int id);
-        IEnumerable<TEntity> GetAllAsync();
+        TEntity GetById(int id);
+        IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-        TEntity SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
-        void AddAsync(TEntity entity);
+        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate);
+        void Add(TEntity entity);
         void Remove(TEntity entity);
     }
 }
