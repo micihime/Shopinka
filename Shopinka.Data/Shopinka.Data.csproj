@@ -12,4 +12,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shopinka.Core\Shopinka.Core.csproj" />
+  </ItemGroup>
+
 </Project>

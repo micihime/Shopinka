@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopinka.Api", "Shopinka\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopinka.Data", "Shopinka.Data\Shopinka.Data.csproj", "{4C3989F5-C662-4B9E-BCE9-7AAD6D68DF06}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopinka.Core", "Shopinka.Core\Shopinka.Core.csproj", "{560D80BC-6CD9-4AD1-8576-4B2B890A5140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4C3989F5-C662-4B9E-BCE9-7AAD6D68DF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C3989F5-C662-4B9E-BCE9-7AAD6D68DF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C3989F5-C662-4B9E-BCE9-7AAD6D68DF06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560D80BC-6CD9-4AD1-8576-4B2B890A5140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560D80BC-6CD9-4AD1-8576-4B2B890A5140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560D80BC-6CD9-4AD1-8576-4B2B890A5140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560D80BC-6CD9-4AD1-8576-4B2B890A5140}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
