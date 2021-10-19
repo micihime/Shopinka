@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Shopinka.Core.Services;
 using Shopinka.Models;
-using System.Linq;
 
 namespace Shopinka.Controllers
 {
@@ -9,25 +8,25 @@ namespace Shopinka.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ShopinkaContext _context;
+        private readonly IProductService _productService;
 
-        public ProductsController(ShopinkaContext context)
+        public ProductsController(IProductService productService)
         {
-            _context = context;
+            this._productService = productService;
         }
 
         // GET: api/<ProductsController>
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_context.Products.ToList());
+            return Ok(_productService.GetAll());
         }
 
         // GET: api/<ProductsController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var product = _context.Products.Find(id);
+            var product = _productService.GetById(id);
 
             if (product == null)
             {
@@ -46,23 +45,7 @@ namespace Shopinka.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
-
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Products.Any(e => e.Id == id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _productService.UpdateDesc(id, product.Description);
 
             return NoContent();
         }
