@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shopinka.Api.Dtos;
 using Shopinka.Core.Services;
-using Shopinka.Models;
 
 namespace Shopinka.Controllers
 {
@@ -38,7 +38,7 @@ namespace Shopinka.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut]
-        public IActionResult Put(int id, Product product)
+        public IActionResult Put(int id, ProductDto product)
         {
             if (id != product.Id)
             {
