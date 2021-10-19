@@ -8,10 +8,7 @@ namespace Shopinka
     {
         public DbSet<Product> Products { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=ShopinkaDb;Trusted_Connection=True;");
-        }
+        public ShopinkaContext(DbContextOptions<ShopinkaContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

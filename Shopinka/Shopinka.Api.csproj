@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Shopinka.Data\Shopinka.Data.csproj" />
+    <ProjectReference Include="..\Shopinka.Service\Shopinka.Service.csproj" />
   </ItemGroup>
 
 

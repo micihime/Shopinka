@@ -11,9 +11,9 @@ namespace Shopinka.Controllers
     {
         private readonly ShopinkaContext _context;
 
-        public ProductsController()
+        public ProductsController(ShopinkaContext context)
         {
-            _context = new ShopinkaContext();
+            _context = context;
         }
 
         // GET: api/<ProductsController>

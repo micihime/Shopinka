@@ -1,8 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Shopinka.Core;
+using Shopinka.Core.Services;
+using Shopinka.Data;
+using Shopinka.Service;
 
 namespace Shopinka
 {
@@ -19,7 +24,9 @@ namespace Shopinka
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
+            services.AddDbContext<ShopinkaContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default"), x => x.MigrationsAssembly("MyMusic.Data")));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddSwaggerGen();
         }
 
