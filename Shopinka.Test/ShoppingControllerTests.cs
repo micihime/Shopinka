@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Shopinka.Api.Controllers;
 using Shopinka.Api.Dtos;
-using Shopinka.Controllers;
 using Shopinka.Core.Services;
 using Shopinka.Models;
 using System.Collections.Generic;
@@ -9,35 +9,65 @@ using Xunit;
 namespace Shopinka.Test
 {
 
-    public class UnitTest1
+    public class ShoppingControllerTests
     {
-        private readonly ProductsController _controller;
+        private readonly ShoppingController _controller;
         private readonly IProductService _service;
 
-        public UnitTest1()
+        public ShoppingControllerTests()
         {
             _service = new ProductFakeService();
-            _controller = new ProductsController(_service);
+            _controller = new ShoppingController(_service);
         }
 
         #region GET ALL
         [Fact]
         public void Get_WhenCalled_ReturnsOkResult()
         {
+            // Arrange
+            var dto = new PagingDto { PageNumber = 1, PageSize = 5 };
             // Act
-            var okResult = _controller.Get();
+            var okResult = _controller.Get(dto);
             // Assert
             Assert.IsType<OkObjectResult>(okResult as OkObjectResult);
         }
 
         [Fact]
-        public void Get_WhenCalled_ReturnsAllItems()
+        public void Get_WhenCalled_ReturnsRequestedNumberOfItems()
         {
+            // Arrange
+            int pageSize = 5;
+            var dto = new PagingDto { PageNumber = 1, PageSize = pageSize };
             // Act
-            var okResult = _controller.Get() as OkObjectResult;
+            var okResult = _controller.Get(dto) as OkObjectResult;
             // Assert
             var items = Assert.IsType<List<Product>>(okResult.Value);
-            Assert.Equal(13, items.Count);
+            Assert.Equal(pageSize, items.Count);
+        }
+
+        [Fact]
+        public void Get_NotExistingPage_ReturnsOkResult()
+        {
+            // Arrange
+            int pageNumber = 30;
+            var dto = new PagingDto { PageNumber = pageNumber, PageSize = 5 };
+            // Act
+            var okResult = _controller.Get(dto);
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult as OkObjectResult);
+        }
+
+        [Fact]
+        public void Get_NotExistingPage_ReturnsEmpty()
+        {
+            // Arrange
+            int pageNumber = 30;
+            var dto = new PagingDto { PageNumber = pageNumber, PageSize = 5 };
+            // Act
+            var okResult = _controller.Get(dto) as OkObjectResult;
+            // Assert
+            var items = Assert.IsType<List<Product>>(okResult.Value);
+            Assert.Empty(items);
         }
         #endregion
 

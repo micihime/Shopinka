@@ -125,6 +125,13 @@ namespace Shopinka.Test
             return _products;
         }
 
+        public IEnumerable<Product> GetAll(int pageNumber, int pageSize)
+        {
+            return _products
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize).ToList();
+        }
+
         public Product GetById(int id)
         {
             return _products.Where(a => a.Id == id)
