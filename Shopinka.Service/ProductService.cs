@@ -2,6 +2,7 @@
 using Shopinka.Core.Services;
 using Shopinka.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Shopinka.Service
 {
@@ -17,6 +18,14 @@ namespace Shopinka.Service
         public IEnumerable<Product> GetAll()
         {
             return _unitOfWork.Products.GetAll();
+        }
+
+        public IEnumerable<Product> GetAll(int pageNumber, int pageSize)
+        {
+            return _unitOfWork.Products.GetAll()
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
         }
 
         public Product GetById(int id)
