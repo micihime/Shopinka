@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shopinka.Models
 {
@@ -15,6 +16,7 @@ namespace Shopinka.Models
         public string ImageUri { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         public string Description { get; set; }

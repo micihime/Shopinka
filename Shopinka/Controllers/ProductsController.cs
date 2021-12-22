@@ -12,7 +12,7 @@ namespace Shopinka.Controllers
 
         public ProductsController(IProductService productService)
         {
-            this._productService = productService;
+            _productService = productService;
         }
 
         // GET: api/<ProductsController>
