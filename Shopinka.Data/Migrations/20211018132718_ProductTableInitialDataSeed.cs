@@ -11,6 +11,7 @@ namespace Shopinka.Migrations
                 columns: new[] { "Id", "Description", "ImageUri", "Name", "Price" },
                 values: new object[,]
                 {
+                    { 1, "Vášeň ukrytá v čokoláde. Čokoláda je jedným z najväčších pokušení aké si človek len môže predstaviť. ", "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg", "Arónia osudu", 1.99m },
                     { 2, "Čokoláda je jedným z najväčších pokušení aké si človek len môže predstaviť. ", "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg", "Karamelový anjelik", 0.69m },
                     { 3, "Chrumkavá vášeň ukrytá v čokoláde. Jemná príchuť kubánskeho rumu.", "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg", "Rumová chrumka", 2.69m },
                     { 4, "Chrumkavá vášeň ukrytá v čokoláde. Dotyk jahôdok. ", "https://elezi.sk/wp-content/uploads/2019/08/photo_21-02-2019_14_18_01-upr_1.jpg", "Jahodová chrumka", 1.69m },
@@ -28,6 +29,11 @@ namespace Shopinka.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DeleteData(
+                table: "Products",
+                keyColumn: "Id",
+                keyValue: 1);
+
             migrationBuilder.DeleteData(
                 table: "Products",
                 keyColumn: "Id",
