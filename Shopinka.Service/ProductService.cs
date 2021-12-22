@@ -24,11 +24,16 @@ namespace Shopinka.Service
             return _unitOfWork.Products.GetById(id);
         }
 
-        public void UpdateDesc(int id, string desc)
+        public bool UpdateDesc(int id, string desc)
         {
             var product = _unitOfWork.Products.GetById(id);
+
+            if (product == null)
+                return false;
+
             product.Description = desc;
             _unitOfWork.Commit();
+            return true;
         }
     }
 }

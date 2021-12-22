@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Shopinka.Api.Dtos;
 using Shopinka.Controllers;
 using Shopinka.Core.Services;
 using Shopinka.Models;
@@ -73,6 +74,47 @@ namespace Shopinka.Test
             // Assert
             Assert.IsType<Product>(okResult.Value);
             Assert.Equal(testId, (okResult.Value as Product).Id);
+        }
+        #endregion
+
+        #region PUT
+        [Fact]
+        public void Put_UnknownIdPassed_ReturnsNotFoundResult()
+        {
+            // Arrange
+            var testId = 1000;
+            var testDesc = "test desc";
+            var dto = new ProductDto { Id = testId, Description = testDesc };
+            // Act
+            var badReqResult = _controller.Put(testId, dto);
+            // Assert
+            Assert.IsType<BadRequestResult>(badReqResult as BadRequestResult);
+        }
+
+        [Fact]
+        public void Put_DifferrentIdInDto_ReturnsBadRequestResult()
+        {
+            // Arrange
+            var testId = 1;
+            var testDesc = "test desc";
+            var dto = new ProductDto { Id = testId++, Description = testDesc };
+            // Act
+            var badReqResult = _controller.Put(testId, dto);
+            // Assert
+            Assert.IsType<BadRequestResult>(badReqResult as BadRequestResult);
+        }
+
+        [Fact]
+        public void Put_ExistingIdPassed_ReturnsNoContentResult()
+        {
+            // Arrange
+            var testId = 1;
+            var testDesc = "test desc";
+            var dto = new ProductDto { Id = testId, Description = testDesc };
+            // Act
+            var noContentResult = _controller.Put(testId, dto);
+            // Assert
+            Assert.IsType<NoContentResult>(noContentResult as NoContentResult);
         }
         #endregion
     }

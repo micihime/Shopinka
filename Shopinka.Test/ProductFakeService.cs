@@ -131,13 +131,16 @@ namespace Shopinka.Test
                 .FirstOrDefault();
         }
 
-        public void UpdateDesc(int id, string desc)
+        public bool UpdateDesc(int id, string desc)
         {
             var p = _products.Where(a => a.Id == id)
                 .FirstOrDefault();
 
-            if (p != null)
-                p.Description = desc;
+            if (p == null)
+                return false;
+
+            p.Description = desc;
+            return true;
         }
     }
 }

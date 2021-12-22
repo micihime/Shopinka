@@ -7,6 +7,6 @@ namespace Shopinka.Core.Services
     {
         IEnumerable<Product> GetAll();
         Product GetById(int id);
-        void UpdateDesc(int id, string desc);
+        bool UpdateDesc(int id, string desc);
     }
 }

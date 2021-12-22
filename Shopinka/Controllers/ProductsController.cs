@@ -45,9 +45,12 @@ namespace Shopinka.Controllers
                 return BadRequest();
             }
 
-            _productService.UpdateDesc(id, product.Description);
+            var isSuccess = _productService.UpdateDesc(id, product.Description);
 
-            return NoContent();
+            if (isSuccess)
+                return NoContent();
+            else
+                return BadRequest();
         }
     }
 }
