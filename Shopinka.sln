@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopinka.Core", "Shopinka.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopinka.Service", "Shopinka.Service\Shopinka.Service.csproj", "{A22752B9-A24D-41F1-A2CA-7AA2FB1A8B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopinka.Test", "Shopinka.Test\Shopinka.Test.csproj", "{39EAF89E-B03C-49A6-B765-78E1900A2E68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopinka.Test", "Shopinka.Test\Shopinka.Test.csproj", "{39EAF89E-B03C-49A6-B765-78E1900A2E68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8F8D0291-0A5D-4C24-B02A-4A6F162B2855}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

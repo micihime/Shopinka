@@ -2,27 +2,28 @@
 using Shopinka.Api.Dtos;
 using Shopinka.Core.Services;
 
-namespace Shopinka.Api.Controllers
+namespace Shopinka.Api.V1.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    public class ShoppingController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
 
-        public ShoppingController(IProductService productService)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
 
-        // GET: api/<ShoppingController>
+        // GET: api/<ProductsController>
         [HttpGet]
-        public IActionResult Get([FromQuery] PagingDto paging)
+        public IActionResult Get()
         {
-            return Ok(_productService.GetAll(paging.PageNumber, paging.PageSize));
+            return Ok(_productService.GetAll());
         }
 
-        // GET: api/<ShoppingController>/5
+        // GET: api/<ProductsController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -36,7 +37,7 @@ namespace Shopinka.Api.Controllers
             return Ok(product);
         }
 
-        // PUT api/<ShoppingController>/5
+        // PUT api/<ProductsController>/5
         [HttpPut]
         public IActionResult Put(int id, ProductDto product)
         {
